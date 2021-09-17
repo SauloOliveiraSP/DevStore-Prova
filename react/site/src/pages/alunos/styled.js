@@ -17,10 +17,10 @@ const Container = styled.div`
     }
 
     .bar-new-student {
-        border: 3px solid #986CDF;
+        border: 3px solid #119FDC;
         border-radius: .5em;
         margin-right: .4em;
-        background-color: #986CDF;
+        background-color: #119FDC;
     }
 
     .text-new-student {
@@ -37,6 +37,7 @@ const Container = styled.div`
         display: flex;
         flex-direction: row;
         padding-top: 2.4em;
+        padding-left: 1.8em;
     }
 
     .agp-input {
@@ -59,6 +60,53 @@ const Container = styled.div`
         display: flex;
         flex-direction: column;
         margin-bottom: 1em;
+    }
+
+    .input-avaliandstok {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1em;
+        margin-top: -0.3em;
+    }
+
+    .input-abx {
+        display: flex;
+        flex-direction: row;
+        padding-top: 0em;
+        padding-left: 1.9em;
+        margin-bottom: 1em;
+    }
+
+    
+    .input-img input {
+        width: 575px;
+        height: 36px;
+
+        background: #FFFFFF;
+        border: 1px solid #A8A8A8;
+        box-sizing: border-box;
+        border-radius: 5px;
+        padding-left: .5em;
+
+    }
+
+    .descri-abx {
+        font-size: 18px;
+        color: #615858;
+        font-weight: 800;
+
+        margin-right: 0.8em;
+    }
+
+    textarea {
+        border-radius: 5px;
+        border: 1px solid rgba(168, 168, 168, 1);
+        resize: none;
+        outline: none;
+        padding: 1em;
+        cursor: text;
+        width: 90vh;
+        height: 20vh;
     }
 
     input {
@@ -89,6 +137,13 @@ const Container = styled.div`
         font-weight: 800;
     }
 
+    .link-image {
+        font-size: 18px;
+        color: #615858;
+        width: 7em;
+        font-weight: 800;
+    }
+
     .class-student {
         font-size: 18px;
         color: #615858;
@@ -101,20 +156,29 @@ const Container = styled.div`
         color: #615858;
         margin-right: 1em;
         font-weight: 800;
+        padding-left: 1em;
     }
 
+    .corse-studenta {
+        font-size: 18px;
+        color: #615858;
+        margin-right: 1em;
+        font-weight: 800;
+        padding-left: 0.5em;
+    }
 
     .button-create {
         align-self: flex-end;
         justify-self: flex-end;
         padding-bottom: 1.5em;
+        margin-bottom: -1em;
     }
 
     .button-create  button {
         width: 106px;
         height: 36px;
 
-        background: #E911C6;
+        background: rgba(17, 159, 220, 1);
         border-radius: 44px;
         border: none;
         color: white;
@@ -221,7 +285,7 @@ const Container = styled.div`
     }
 
     thead {
-        background-color: #986CDF;
+        background-color: #6CC3DF;
     }
 
     table {
@@ -276,7 +340,7 @@ const Container = styled.div`
     }
 
     .button-create button:hover {
-        background-color: #aa3997;
+        background-color: #6CC3DF;
         transition: 2s;
     }
 

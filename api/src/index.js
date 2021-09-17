@@ -6,36 +6,54 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/matricula', async (req, resp) => {
+app.get('/produto', async (req, resp) => {
     try {
-        let alunos = await db.tb_matricula.findAll({ order: [['id_matricula', 'desc']] });
-        resp.send(alunos);
+        let produtos = await db.tb_produto.findAll({ order: [['id_produto', 'desc']] });
+        resp.send(produtos);
     } catch (e) {
         resp.send({ erro: e.toString() })
     }
 })
 
-app.post('/matricula', async (req, resp) => {
+app.post('/produto', async (req, resp) => {
     try {
-        let { nome, chamada, curso, turma } = req.body;
+        let { produto, categoria, precode, precopor, avaliacao, descricao, estoque, imagem } = req.body;
         
-        if (nome == '' || chamada == '' || curso == '' || turma == '')
+        if (produto == '' || categoria == '' || precode == '' || precopor == ''|| avaliacao == '' || descricao == '' || estoque == '' || imagem == '')
         return resp.send({erro: ' Todos os campos devem ser inseridos!'});
 
-        if (chamada <= 0 )
-        return resp.send({erro: ' O número de chamada NÃO pode ser NEGATIVA ou 0!'});
+        if (precode <= 0 || precopor <= 0 || avaliacao <= 0 || estoque <= 0 )
+        return resp.send({erro: ' Somente Números no campos de PREÇO DE, PREÇO POR, AVALIAÇÃO E ESTOQUE!'});
 
-        let valit = await db.tb_matricula.findOne({ where: { nm_turma: turma}});
-        let valic = await db.tb_matricula.findOne({ where: { nr_chamada: chamada}});
+        if(!isNaN(precopor) == false) {
+            return resp.send({ erro: ' No campo PREÇO POR coloque APENAS Números!' })
+        }   
 
-        if (valit != null && valic != null)
-        return resp.send({erro: ' O Aluno já existe nesta turma!'});
+        if(!isNaN(avaliacao) == false) {
+            return resp.send({ erro: ' No campo AVALIAÇÃO coloque APENAS Números!' })
+        }
 
-        let r = await db.tb_matricula.create({
-            nm_aluno: nome,
-            nr_chamada: chamada,
-            nm_curso: curso,
-            nm_turma: turma
+        if(!isNaN(precode) == false)
+            return resp.send({ erro: ' No campo PREÇO DE coloque APENAS Números!' })
+
+        if( !isNaN(estoque) == false)
+            return resp.send({ erro: ' No campo ESTOQUE coloque APENAS Números!' })
+
+        let valic = await db.tb_produto.findOne({ where: { nm_produto: produto}});
+
+        if (valic != null)
+        return resp.send({erro: ' O Produto já existe nesta turma!'});
+
+        let r = await db.tb_produto.create({
+            nm_produto: produto,
+            ds_categoria: categoria,
+            vl_preco_de: precode,
+            vl_preco_por: precopor,
+            ds_produto: descricao,
+            qtd_estoque: estoque,
+            img_produto: imagem,
+            bt_ativo: true,
+            dt_inclusao: new Date()
         })
         resp.send(r);
     } catch (e) {
@@ -43,26 +61,31 @@ app.post('/matricula', async (req, resp) => {
     }
 })
 
-app.put('/matricula/:id', async (req, resp) => {
+app.put('/produto/:id', async (req, resp) => {
     try {
-        let { nome, chamada, curso, turma } = req.body;
+        let { produto, categoria, precode, precopor, avaliacao, descricao, estoque, imagem } = req.body;
         let { id } = req.params;
 
-        if (nome == '' || chamada == '' || curso == '' || turma == '')
+        if (produto == '' || categoria == '' || precode == '' || precopor == ''|| avaliacao == '' || descricao == '' || estoque == '' || imagem == '')
         return resp.send({erro: ' Todos os campos devem ser inseridos!'});
 
-        if (chamada <= 0 )
-        return resp.send({erro: ' O número de chamada NÃO pode ser NEGATIVA ou 0!'});
+        if (precode <= 0 || precopor <= 0 || avaliacao <= 0 || estoque <= 0 )
+        return resp.send({erro: ' Somente Números no campos de PREÇO DE, PREÇO POR, AVALIAÇÃO E ESTOQUE!'});
 
-        let r = await db.tb_matricula.update(
+        let r = await db.tb_produto.update(
             {
-                nm_aluno: nome,
-                nr_chamada: chamada,
-                nm_curso: curso,
-                nm_turma: turma
+                nm_produto: produto,
+                ds_categoria: categoria,
+                vl_preco_de: precode,
+                vl_preco_por: precopor,
+                ds_produto: descricao,
+                qtd_estoque: estoque,
+                img_produto: imagem,
+                bt_ativo: true,
+                dt_inclusao: new Date()
             },
             {
-                where: { id_matricula: id }
+                where: { id_produto: id }
             }
         )
         resp.sendStatus(200);
@@ -71,11 +94,11 @@ app.put('/matricula/:id', async (req, resp) => {
     }
 })
 
-app.delete('/matricula/:id', async (req, resp) => {
+app.delete('/produto/:id', async (req, resp) => {
     try {
         let { id } = req.params;
 
-        let r = await db.tb_matricula.destroy({ where: { id_matricula: id } })
+        let r = await db.tb_produto.destroy({ where: { id_produto: id } })
         resp.sendStatus(200);
     } catch (e) {
         resp.send({ erro: e.toString() })
