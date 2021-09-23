@@ -44,7 +44,7 @@ export default function Index() {
 
     async function inserir() {
 
-        if (idAlterando == 0) {
+        if (idAlterando === 0) {
             let r = await api.inserir(produto, categoria, precode, precopor, avaliacao, descricao, estoque, imagem);
 
             if (r.erro)
@@ -132,7 +132,7 @@ export default function Index() {
                         
                         <div class="text-new-student">
                             <div class="bar-new-student"></div>
-                            <div class="text-new-student"> {idAlterando == 0 ? "Novo Produto" : "Alterando Produto " + idAlterando } </div>
+                            <div class="text-new-student"> {idAlterando === 0 ? "Novo Produto" : "Alterando Produto " + idAlterando } </div>
                         </div>
 
                         <div class="input-new-student"> 
@@ -176,7 +176,7 @@ export default function Index() {
                         <div class="input-abx">
                             <div class="descri-abx"> Descrição: </div>
                             <textarea class="textarea-abx" type="text" value={descricao} onChange={e => setDescricao(e.target.value)}/>
-                            <div class="button-create"> <button onClick={inserir}> {idAlterando == 0 ? "Cadastrar" : "Alterar"} </button> </div>
+                            <div class="button-create"> <button onClick={inserir}> {idAlterando === 0 ? "Cadastrar" : "Alterar"} </button> </div>
                         </div>
                     </div>
 
@@ -204,7 +204,7 @@ export default function Index() {
 
                                 {produtos.map((item, i) =>
 
-                                    <tr className={i % 2 == 0 ? "linha-alternada" : ""}>
+                                    <tr className={i % 2 === 0 ? "linha-alternada" : ""}>
                                         <td title={item.img_produto}> <img src={item.img_produto} alt='' style={{width: '40px', height: '40px'}}/> </td>
                                         <td> {item.id_produto} </td>
                                         <td title={item.nm_produto}>
