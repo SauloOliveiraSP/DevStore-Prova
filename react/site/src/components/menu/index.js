@@ -16,7 +16,7 @@ export default function Index() {
             </div>
             <div className="left-box-aluno">
                 <div> Produtos </div>
-            </div> 
+            </div>
         </Container>
     )
 }

@@ -18,31 +18,31 @@ app.get('/produto', async (req, resp) => {
 app.post('/produto', async (req, resp) => {
     try {
         let { produto, categoria, precode, precopor, avaliacao, descricao, estoque, imagem } = req.body;
-        
-        if (produto == '' || categoria == '' || precode == '' || precopor == ''|| avaliacao == '' || descricao == '' || estoque == '' || imagem == '')
-        return resp.send({erro: ' Todos os campos devem ser inseridos!'});
 
-        if (precode <= 0 || precopor <= 0 || avaliacao <= 0 || estoque <= 0 )
-        return resp.send({erro: ' Somente Números no campos de PREÇO DE, PREÇO POR, AVALIAÇÃO E ESTOQUE!'});
+        if (produto == '' || categoria == '' || precode == '' || precopor == '' || avaliacao == '' || descricao == '' || estoque == '' || imagem == '')
+            return resp.send({ erro: ' Todos os campos devem ser inseridos!' });
 
-        if(!isNaN(precopor) == false) {
+        if (precode <= 0 || precopor <= 0 || avaliacao <= 0 || estoque <= 0)
+            return resp.send({ erro: ' Somente Números no campos de PREÇO DE, PREÇO POR, AVALIAÇÃO E ESTOQUE!' });
+
+        if (!isNaN(precopor) == false) {
             return resp.send({ erro: ' No campo PREÇO POR coloque APENAS Números!' })
-        }   
+        }
 
-        if(!isNaN(avaliacao) == false) {
+        if (!isNaN(avaliacao) == false) {
             return resp.send({ erro: ' No campo AVALIAÇÃO coloque APENAS Números!' })
         }
 
-        if(!isNaN(precode) == false)
+        if (!isNaN(precode) == false)
             return resp.send({ erro: ' No campo PREÇO DE coloque APENAS Números!' })
 
-        if( !isNaN(estoque) == false)
+        if (!isNaN(estoque) == false)
             return resp.send({ erro: ' No campo ESTOQUE coloque APENAS Números!' })
 
-        let valic = await db.tb_produto.findOne({ where: { nm_produto: produto}});
+        let valic = await db.tb_produto.findOne({ where: { nm_produto: produto } });
 
         if (valic != null)
-        return resp.send({erro: ' O Produto já existe nesta turma!'});
+            return resp.send({ erro: ' O Produto já existe nesta turma!' });
 
         let r = await db.tb_produto.create({
             nm_produto: produto,
@@ -66,11 +66,11 @@ app.put('/produto/:id', async (req, resp) => {
         let { produto, categoria, precode, precopor, avaliacao, descricao, estoque, imagem } = req.body;
         let { id } = req.params;
 
-        if (produto == '' || categoria == '' || precode == '' || precopor == ''|| avaliacao == '' || descricao == '' || estoque == '' || imagem == '')
-        return resp.send({erro: ' Todos os campos devem ser inseridos!'});
+        if (produto == '' || categoria == '' || precode == '' || precopor == '' || avaliacao == '' || descricao == '' || estoque == '' || imagem == '')
+            return resp.send({ erro: ' Todos os campos devem ser inseridos!' });
 
-        if (precode <= 0 || precopor <= 0 || avaliacao <= 0 || estoque <= 0 )
-        return resp.send({erro: ' Somente Números no campos de PREÇO DE, PREÇO POR, AVALIAÇÃO E ESTOQUE!'});
+        if (precode <= 0 || precopor <= 0 || avaliacao <= 0 || estoque <= 0)
+            return resp.send({ erro: ' Somente Números no campos de PREÇO DE, PREÇO POR, AVALIAÇÃO E ESTOQUE!' });
 
         let r = await db.tb_produto.update(
             {

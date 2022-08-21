@@ -1,4 +1,3 @@
-
 import Cabecalho from '../../components/cabecalho'
 import Menu from '../../components/menu'
 
@@ -37,7 +36,7 @@ export default function Index() {
         loading.current.continuousStart();
 
         let r = await api.listar();
-        setProdutos(r);
+        //setProdutos(r);
 
         loading.current.complete();
     }
@@ -81,22 +80,22 @@ export default function Index() {
             title: 'Remover Produto',
             message: `Tem certeza que deseja remover o produto ${id} ?`,
             buttons: [
-              {
-                label: 'Sim', 
-                onClick: async () => {
-                    let r = await api.remover(id);
-                    if (r.erro)
-                        toast.error(`${r.erro}`);
-                    else {
-                        
-                        toast.dark('✔️ Produto removido!')
-                        listar();
+                {
+                    label: 'Sim',
+                    onClick: async () => {
+                        let r = await api.remover(id);
+                        if (r.erro)
+                            toast.error(`${r.erro}`);
+                        else {
+
+                            toast.dark('✔️ Produto removido!')
+                            listar();
+                        }
                     }
+                },
+                {
+                    label: 'Não'
                 }
-              },
-              {
-                label: 'Não'
-              }
             ]
         });
     }
@@ -122,71 +121,71 @@ export default function Index() {
 
     return (
         <Container>
-            <ToastContainer/>
-            <LoadingBar color="#10EAEA" ref={loading}/>
+            <ToastContainer />
+            <LoadingBar color="#10EAEA" ref={loading} />
             <Menu />
             <Conteudo>
                 <Cabecalho />
                 <div class="body-right-box">
                     <div class="new-student-box">
-                        
+
                         <div class="text-new-student">
                             <div class="bar-new-student"></div>
-                            <div class="text-new-student"> {idAlterando === 0 ? "Novo Produto" : "Alterando Produto " + idAlterando } </div>
+                            <div class="text-new-student"> {idAlterando === 0 ? "Novo Produto" : "Alterando Produto " + idAlterando} </div>
                         </div>
 
-                        <div class="input-new-student"> 
+                        <div class="input-new-student">
                             <div class="input-left">
-                                <div class="agp-input"> 
-                                    <div class="name-student"> Nome: </div>  
-                                    <div class="input"> <input type="text" value={produto} onChange={e => setProduto(e.target.value)} /> </div>  
-                                </div> 
                                 <div class="agp-input">
-                                    <div class="number-student"> Categoria: </div>  
-                                    <div class="input"> <input type="text" value={categoria} onChange={e => setCategoria(e.target.value)} /> </div> 
+                                    <div class="name-student"> Nome: </div>
+                                    <div class="input"> <input type="text" value={produto} onChange={e => setProduto(e.target.value)} /> </div>
                                 </div>
                                 <div class="agp-input">
-                                    <div class="number-student"> Avaliação: </div>  
-                                    <div class="input"> <input type="text" value={avaliacao} onChange={e => setAvaliacao(e.target.value)} /> </div>  
+                                    <div class="number-student"> Categoria: </div>
+                                    <div class="input"> <input type="text" value={categoria} onChange={e => setCategoria(e.target.value)} /> </div>
+                                </div>
+                                <div class="agp-input">
+                                    <div class="number-student"> Avaliação: </div>
+                                    <div class="input"> <input type="text" value={avaliacao} onChange={e => setAvaliacao(e.target.value)} /> </div>
                                 </div>
                             </div>
 
 
                             <div class="input-right">
                                 <div class="agp-input">
-                                    <div class="corse-studenta"> Preço DE: </div>  
-                                    <div class="input"> <input type="text" value={precode} onChange={e => setPrecoDe(e.target.value)} /> </div>  
+                                    <div class="corse-studenta"> Preço DE: </div>
+                                    <div class="input"> <input type="text" value={precode} onChange={e => setPrecoDe(e.target.value)} /> </div>
                                 </div>
                                 <div class="agp-input">
-                                    <div class="class-student"> Preço POR: </div>  
-                                    <div class="input"> <input type="text" value={precopor} onChange={e => setPrecoPor(e.target.value)} /> </div> 
+                                    <div class="class-student"> Preço POR: </div>
+                                    <div class="input"> <input type="text" value={precopor} onChange={e => setPrecoPor(e.target.value)} /> </div>
                                 </div>
                                 <div class="agp-input">
-                                    <div class="corse-student"> Estoque: </div>  
-                                    <div class="input"> <input type="text" value={estoque} onChange={e => setEstoque(e.target.value)} /> </div>  
+                                    <div class="corse-student"> Estoque: </div>
+                                    <div class="input"> <input type="text" value={estoque} onChange={e => setEstoque(e.target.value)} /> </div>
                                 </div>
                             </div>
                         </div>
                         <div class="input-avaliandstok">
                             <div class="agp-input">
-                                    <div class="link-image"> Link Imagem: </div>  
-                                    <div class="input-img"> <input type="text" value={imagem} onChange={e => setImagem(e.target.value)} /> </div>  
+                                <div class="link-image"> Link Imagem: </div>
+                                <div class="input-img"> <input type="text" value={imagem} onChange={e => setImagem(e.target.value)} /> </div>
                             </div>
                         </div>
                         <div class="input-abx">
                             <div class="descri-abx"> Descrição: </div>
-                            <textarea class="textarea-abx" type="text" value={descricao} onChange={e => setDescricao(e.target.value)}/>
+                            <textarea class="textarea-abx" type="text" value={descricao} onChange={e => setDescricao(e.target.value)} />
                             <div class="button-create"> <button onClick={inserir}> {idAlterando === 0 ? "Cadastrar" : "Alterar"} </button> </div>
                         </div>
                     </div>
 
                     <div class="student-registered-box">
-                        <div class="row-bar"> 
+                        <div class="row-bar">
                             <div class="bar-new-student"> </div>
                             <div class="text-registered-student"> Produtos Cadastrados </div>
                         </div>
-                    
-                        <table class ="table-user">
+
+                        <table class="table-user">
                             <thead>
                                 <tr>
                                     <th> </th>
@@ -205,17 +204,17 @@ export default function Index() {
                                 {produtos.map((item, i) =>
 
                                     <tr className={i % 2 === 0 ? "linha-alternada" : ""}>
-                                        <td title={item.img_produto}> <img src={item.img_produto} alt='' style={{width: '40px', height: '40px'}}/> </td>
+                                        <td title={item.img_produto}> <img src={item.img_produto} alt='' style={{ width: '40px', height: '40px' }} /> </td>
                                         <td> {item.id_produto} </td>
                                         <td title={item.nm_produto}>
                                             {item.nm_produto != null && item.nm_produto.length >= 20
                                                 ? item.nm_produto.substr(0, 20) + '...'
                                                 : item.nm_produto}
                                         </td>
-                                        <td title={item.ds_categoria}> 
+                                        <td title={item.ds_categoria}>
                                             {item.ds_categoria != null && item.ds_categoria.length >= 20
-                                                    ? item.ds_categoria.substr(0, 20) + '...'
-                                                    : item.ds_categoria} 
+                                                ? item.ds_categoria.substr(0, 20) + '...'
+                                                : item.ds_categoria}
                                         </td>
                                         <td> {item.vl_preco_por} </td>
                                         <td> {item.qtd_estoque} </td>
@@ -224,7 +223,7 @@ export default function Index() {
                                     </tr>
                                 )}
 
-                            </tbody> 
+                            </tbody>
                         </table>
                     </div>
                 </div>
